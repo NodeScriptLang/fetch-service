@@ -15,7 +15,7 @@
         "dev": "tsc -b -w",
         "compile": "tsc -b",
         "lint": "eslint --ext=.js,.ts,.vue --cache .",
-        "test": "NODE_ENV=test mocha",
+        "test": "NODE_NO_WARNINGS=1 NODE_ENV=test mocha",
         "version": "run-s version:*",
         "version:compile": "npm run compile",
         "version:workspaces": "npm exec --workspaces -- npm version $npm_package_version && git add .",
@@ -34,9 +34,21 @@
     "author": "Boris Okunskiy",
     "license": "ISC",
     "dependencies": {
-        "@nodescript/fetch-protocol": "file:protocol"
+        "@flexent/config": "^1.0.2",
+        "@flexent/http-server": "^0.1.3",
+        "@flexent/logger": "^1.1.0",
+        "@flexent/mesh": "^3.0.0",
+        "@flexent/protocomm": "^0.3.0",
+        "@flexent/schema": "^5.0.0",
+        "@nodescript/fetch-protocol": "file:protocol",
+        "dotenv": "^16.0.2"
     },
     "devDependencies": {
+        "@flexent/eslint-config": "^1.0.0",
+        "@types/mocha": "^9.1.1",
+        "@types/node": "^18.7.23",
+        "eslint": "^8.24.0",
+        "mocha": "^10.0.0",
         "npm-run-all": "^4.1.5",
         "pre-commit": "^1.2.2",
         "typescript": "^4.3.5"

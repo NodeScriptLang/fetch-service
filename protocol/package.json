@@ -13,7 +13,7 @@
         "out/**/*"
     ],
     "dependencies": {
-        "@flexent/protocomm": "^0.2.1",
-        "airtight": "^4.3.3"
+        "@flexent/protocomm": "^0.3.0",
+        "@flexent/schema": "^5.0.0"
     }
 }

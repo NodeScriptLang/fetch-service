@@ -1,4 +1,4 @@
-import { Schema } from 'airtight';
+import { Schema } from '@flexent/schema';
 
 export interface FetchHeaders {
     [key: string]: string[];

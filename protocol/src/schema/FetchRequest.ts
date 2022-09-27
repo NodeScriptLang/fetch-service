@@ -1,4 +1,4 @@
-import { Schema } from 'airtight';
+import { Schema } from '@flexent/schema';
 
 import { FetchHeaders, FetchHeadersSchema } from './FetchHeaders.js';
 import { FetchMethod, FetchMethodSchema } from './FetchMethod.js';
