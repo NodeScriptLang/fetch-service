@@ -1,0 +1,19 @@
+{
+    "name": "@nodescript/fetch-protocol",
+    "version": "1.0.0",
+    "description": "Fetch Service Protocol",
+    "type": "module",
+    "sideEffects": false,
+    "exports": {
+        ".": "./out/index.js"
+    },
+    "main": "./out/index.js",
+    "types": "./out/index.d.ts",
+    "files": [
+        "out/**/*"
+    ],
+    "dependencies": {
+        "@flexent/protocomm": "^0.2.1",
+        "airtight": "^4.3.3"
+    }
+}
