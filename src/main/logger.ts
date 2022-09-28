@@ -3,11 +3,13 @@ import { LogfmtLogger } from '@flexent/logger';
 
 export class StandardLogger extends LogfmtLogger {
 
-    @config() LOG_LEVEL!: string;
+    @config({ default: 'info' }) LOG_LEVEL!: string;
+    @config({ default: false }) LOG_PRETTY!: boolean;
 
     constructor() {
         super();
         this.setLevel(this.LOG_LEVEL);
+        this.setPretty(this.LOG_PRETTY);
     }
 
 }
