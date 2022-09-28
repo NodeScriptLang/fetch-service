@@ -7,7 +7,7 @@ RUN npm ci && npm run build && rm -rf node_modules
 
 ##################################################
 
-FROM node:18.15-slim
+FROM node:18.9-slim
 
 ENV NODE_ENV production
 
