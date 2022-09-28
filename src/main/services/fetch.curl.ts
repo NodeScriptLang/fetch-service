@@ -1,4 +1,6 @@
 import { config } from '@flexent/config';
+import { Logger } from '@flexent/logger';
+import { dep } from '@flexent/mesh';
 import { FetchHeaders, FetchRequest, FetchResponse } from '@nodescript/fetch-protocol';
 import { spawn } from 'child_process';
 
@@ -6,9 +8,11 @@ import { FetchService } from './fetch.js';
 
 export class FetchCurlService extends FetchService {
 
+    @dep() logger!: Logger;
     @config({ default: 'curl' }) CURL_PATH!: string;
 
     async sendRequest(request: FetchRequest): Promise<FetchResponse> {
+        const startedAt = Date.now();
         const args = this.prepareArgs(request);
         const child = spawn(this.CURL_PATH, args, {
             stdio: 'pipe',
@@ -24,6 +28,13 @@ export class FetchCurlService extends FetchService {
             this.readStream(child.stderr),
         ]);
         const { headers: responseHeaders, info } = this.parseStderr(stderr);
+        const duration = Date.now() - startedAt;
+        this.logger.info('Request served', {
+            url: request.url,
+            status: info.response_code,
+            size: stdout.byteLength,
+            duration,
+        });
         return {
             status: info.response_code,
             headers: responseHeaders,
