@@ -1,3 +1,4 @@
+import { config } from '@flexent/config';
 import { FetchHeaders, FetchRequest, FetchResponse } from '@nodescript/fetch-protocol';
 import { spawn } from 'child_process';
 
@@ -5,9 +6,11 @@ import { FetchService } from './fetch.js';
 
 export class FetchCurlService extends FetchService {
 
+    @config({ default: 'curl' }) CURL_PATH!: string;
+
     async sendRequest(request: FetchRequest): Promise<FetchResponse> {
         const args = this.prepareArgs(request);
-        const child = spawn('curl', args, {
+        const child = spawn(this.CURL_PATH, args, {
             stdio: 'pipe',
         });
         if (this.supportsBody(request.method)) {

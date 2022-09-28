@@ -1,0 +1,11 @@
+**/node_modules
+**/test
+**/out
+**/*.tsbuildinfo
+**/.env
+.vscode
+.git
+.github
+.eslintcache
+
+Dockerfile*

@@ -31,9 +31,24 @@ export class App {
         return mesh;
     }
 
-    async start() {}
+    async start() {
+        process.on('uncaughtException', error => {
+            this.logger.error('uncaughtException', { error });
+        });
+        process.on('unhandledRejection', error => {
+            this.logger.error('unhandledRejection', { error });
+        });
+        process.on('SIGTERM', () => this.logger.info('Received SIGTERM'));
+        process.on('SIGINT', () => this.logger.info('Received SIGINT'));
+        process.on('SIGTERM', () => this.stop());
+        process.on('SIGINT', () => this.stop());
+        await this.httpServer.start();
+    }
 
-    async stop() {}
+    async stop() {
+        process.removeAllListeners();
+        await this.httpServer.stop();
+    }
 
     get logger() {
         return this.mesh.resolve(Logger);
