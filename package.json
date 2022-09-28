@@ -20,7 +20,7 @@
         "version": "run-s version:*",
         "version:compile": "npm run compile",
         "version:workspaces": "npm exec --workspaces -- npm version $npm_package_version && git add .",
-        "postversion": "run-p postversion:*",
+        "postversion": "run-s postversion:*",
         "postversion:push": "git push --tags origin main",
         "postversion:publish-protocol": "cd protocol && npm publish --access=public"
     },
