@@ -1,15 +1,21 @@
 import { config } from '@flexent/config';
-import { LogfmtLogger } from '@flexent/logger';
+import { ConsoleLogger, LogfmtLogger, Logger, LogLevel } from '@flexent/logger';
 
-export class StandardLogger extends LogfmtLogger {
+export class StandardLogger extends Logger {
 
     @config({ default: 'info' }) LOG_LEVEL!: string;
     @config({ default: false }) LOG_PRETTY!: boolean;
 
+    private delegate: Logger;
+
     constructor() {
         super();
+        this.delegate = this.LOG_PRETTY ? new ConsoleLogger() : new LogfmtLogger();
         this.setLevel(this.LOG_LEVEL);
-        this.setPretty(this.LOG_PRETTY);
+    }
+
+    override write(level: LogLevel, message: string, data: object): void {
+        this.delegate.write(level, message, data);
     }
 
 }

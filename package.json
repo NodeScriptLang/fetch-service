@@ -36,8 +36,8 @@
     "license": "ISC",
     "dependencies": {
         "@flexent/config": "^1.0.2",
-        "@flexent/http-server": "^0.1.4",
-        "@flexent/logger": "^1.1.1",
+        "@flexent/http-server": "^0.1.7",
+        "@flexent/logger": "^1.2.1",
         "@flexent/mesh": "^3.0.0",
         "@flexent/protocomm": "^0.3.0",
         "@flexent/schema": "^5.0.0",
