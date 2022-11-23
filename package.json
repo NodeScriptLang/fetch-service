@@ -42,16 +42,16 @@
         "@flexent/protocomm": "^0.3.0",
         "@flexent/schema": "^5.0.0",
         "@nodescript/fetch-protocol": "file:protocol",
-        "dotenv": "^16.0.2"
+        "dotenv": "^16.0.3"
     },
     "devDependencies": {
         "@flexent/eslint-config": "^1.0.0",
-        "@types/mocha": "^9.1.1",
-        "@types/node": "^18.7.23",
-        "eslint": "^8.24.0",
-        "mocha": "^10.0.0",
+        "@types/mocha": "^10.0.0",
+        "@types/node": "^18.11.9",
+        "eslint": "^8.28.0",
+        "mocha": "^10.1.0",
         "npm-run-all": "^4.1.5",
         "pre-commit": "^1.2.2",
-        "typescript": "^4.3.5"
+        "typescript": "^4.9.3"
     }
 }
