@@ -1,8 +1,6 @@
 import { Config, ProcessEnvConfig } from '@flexent/config';
-import { CreateRequestScope } from '@flexent/http-server';
 import { Logger } from '@flexent/logger';
 import { Mesh } from '@flexent/mesh';
-
 import { FetchDomainImpl } from './domains/fetch.js';
 import { FetchProtocolHandler, FetchProtocolImpl, HttpServer } from './http-server.js';
 import { StandardLogger } from './logger.js';
@@ -15,7 +13,7 @@ export class App {
     constructor() {
         this.mesh = new Mesh('App');
         this.mesh.constant('App', this);
-        this.mesh.constant<CreateRequestScope>('requestScope', () => this.createRequestScope());
+        this.mesh.constant('httpRequestScope', () => this.createRequestScope());
         this.mesh.service(Config, ProcessEnvConfig);
         this.mesh.service(Logger, StandardLogger);
         this.mesh.service(HttpServer);
