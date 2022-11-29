@@ -1,4 +1,4 @@
-import { DomainDef } from '@flexent/protocomm';
+import { DomainDef } from '@nodescript/protocomm';
 
 import { FetchRequest, FetchRequestSchema } from '../schema/FetchRequest.js';
 import { FetchResponse, FetchResponseSchema } from '../schema/FetchResponse.js';

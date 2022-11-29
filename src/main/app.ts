@@ -1,6 +1,7 @@
-import { Config, ProcessEnvConfig } from '@flexent/config';
-import { Logger } from '@flexent/logger';
-import { Mesh } from '@flexent/mesh';
+import { Config, ProcessEnvConfig } from '@nodescript/config';
+import { Logger } from '@nodescript/logger';
+import { Mesh } from '@nodescript/mesh';
+
 import { FetchDomainImpl } from './domains/fetch.js';
 import { FetchProtocolHandler, FetchProtocolImpl, HttpServer } from './http-server.js';
 import { StandardLogger } from './logger.js';

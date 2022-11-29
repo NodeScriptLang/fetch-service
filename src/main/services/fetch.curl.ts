@@ -1,7 +1,7 @@
-import { config } from '@flexent/config';
-import { Logger } from '@flexent/logger';
-import { dep } from '@flexent/mesh';
+import { config } from '@nodescript/config';
 import { FetchHeaders, FetchRequest, FetchResponse } from '@nodescript/fetch-protocol';
+import { Logger } from '@nodescript/logger';
+import { dep } from '@nodescript/mesh';
 import { spawn } from 'child_process';
 
 import { FetchService } from './fetch.js';

@@ -13,7 +13,7 @@
         "out/**/*"
     ],
     "dependencies": {
-        "@flexent/protocomm": "^0.5.0",
-        "@flexent/schema": "^5.2.0"
+        "@nodescript/protocomm": "^0.5.0",
+        "@nodescript/schema": "^5.2.0"
     }
 }
