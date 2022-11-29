@@ -1,5 +1,5 @@
-import { config } from '@flexent/config';
-import { ConsoleLogger, LogfmtLogger, Logger, LogLevel } from '@flexent/logger';
+import { config } from '@nodescript/config';
+import { ConsoleLogger, LogfmtLogger, Logger, LogLevel } from '@nodescript/logger';
 
 export class StandardLogger extends Logger {
 

@@ -1,5 +1,5 @@
-import { BaseHttpServer, HttpProtocolHandler } from '@flexent/http-server';
-import { dep } from '@flexent/mesh';
+import { BaseHttpServer, HttpProtocolHandler } from '@nodescript/http-server';
+import { dep } from '@nodescript/mesh';
 import { FetchProtocol, fetchProtocol } from '@nodescript/fetch-protocol';
 
 import { FetchDomainImpl } from './domains/fetch.js';

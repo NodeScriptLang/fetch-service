@@ -1,4 +1,4 @@
-import { dep } from '@flexent/mesh';
+import { dep } from '@nodescript/mesh';
 import { FetchDomain, FetchRequest, FetchResponse } from '@nodescript/fetch-protocol';
 
 import { FetchService } from '../services/fetch.js';

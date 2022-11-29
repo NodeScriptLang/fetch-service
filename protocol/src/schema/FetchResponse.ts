@@ -1,4 +1,4 @@
-import { Schema } from '@flexent/schema';
+import { Schema } from '@nodescript/schema';
 
 import { FetchHeaders, FetchHeadersSchema } from './FetchHeaders.js';
 

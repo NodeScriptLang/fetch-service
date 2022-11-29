@@ -1,4 +1,4 @@
-import { ProtocolIndex } from '@flexent/protocomm';
+import { ProtocolIndex } from '@nodescript/protocomm';
 
 import { FetchDomain } from './domains/Fetch.js';
 
