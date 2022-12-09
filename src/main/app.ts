@@ -21,7 +21,7 @@ export class App extends BaseApp {
         this.mesh.service(HttpServer);
     }
 
-    protected createRequestScope() {
+    createRequestScope() {
         const mesh = new Mesh('Request');
         mesh.parent = this.mesh;
         mesh.service(FetchProtocolHandler);

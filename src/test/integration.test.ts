@@ -1,16 +1,6 @@
 import assert from 'assert';
 
-import { runtime } from './runtime.js';
-
 describe('App Server', () => {
-
-    beforeEach(async () => {
-        await runtime.app.httpServer.start();
-    });
-
-    afterEach(async () => {
-        await runtime.app.httpServer.stop();
-    });
 
     it('sends GET request', async () => {
         const res = await fetch('http://localhost:8080/Fetch/sendRequest', {
