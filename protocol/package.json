@@ -1,6 +1,6 @@
 {
     "name": "@nodescript/fetch-protocol",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Fetch Service Protocol",
     "type": "module",
     "sideEffects": false,
