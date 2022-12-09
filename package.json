@@ -12,7 +12,7 @@
         "clean": "run-p clean:*",
         "clean:self": "rm -rf out *.tsbuildinfo",
         "clean:workspaces": "npm run clean --workspaces --if-present",
-        "dev": "tsc -b -w",
+        "dev": "npm run clean && tsc -b -w",
         "compile": "npm run clean && tsc -b",
         "lint": "eslint --ext=.js,.ts,.vue --cache .",
         "test": "NODE_NO_WARNINGS=1 NODE_ENV=test mocha",
