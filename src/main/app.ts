@@ -4,10 +4,11 @@ import { Logger } from '@nodescript/logger';
 import { dep, Mesh } from '@nodescript/mesh';
 import { BaseApp, StandardLogger } from '@nodescript/microservice';
 
-import { FetchDomainImpl } from './domains/fetch.js';
-import { FetchProtocolHandler, FetchProtocolImpl } from './handler.js';
-import { FetchCurlService } from './services/fetch.curl.js';
-import { FetchService } from './services/fetch.js';
+import { FetchDomainImpl } from './FetchDomainImpl.js';
+import { FetchProtocolHandler } from './FetchProtocolHandler.js';
+import { FetchProtocolImpl } from './FetchProtocolImpl.js';
+import { FetchCurlService } from './FetchService.curl.js';
+import { FetchService } from './FetchService.js';
 
 export class App extends BaseApp {
 

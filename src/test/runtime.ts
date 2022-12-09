@@ -2,7 +2,7 @@ import { dep, Mesh } from '@nodescript/mesh';
 import { config } from 'dotenv';
 
 import { App } from '../main/app.js';
-import { FetchDomainImpl } from '../main/domains/fetch.js';
+import { FetchDomainImpl } from '../main/FetchDomainImpl.js';
 import { TestHttpServer } from './test-server.js';
 
 config({ path: '.env' });

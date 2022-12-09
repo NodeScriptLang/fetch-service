@@ -1,7 +1,7 @@
 import { FetchDomain, FetchRequest, FetchResponse } from '@nodescript/fetch-protocol';
 import { dep } from '@nodescript/mesh';
 
-import { FetchService } from '../services/fetch.js';
+import { FetchService } from './FetchService.js';
 
 export class FetchDomainImpl implements FetchDomain {
     @dep() protected fetchService!: FetchService;

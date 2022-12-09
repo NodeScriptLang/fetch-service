@@ -4,7 +4,7 @@ import { Logger } from '@nodescript/logger';
 import { dep } from '@nodescript/mesh';
 import { spawn } from 'child_process';
 
-import { FetchService } from './fetch.js';
+import { FetchService } from './FetchService.js';
 
 export class FetchCurlService extends FetchService {
 
