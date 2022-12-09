@@ -1,17 +1,8 @@
 import { FetchProtocol, fetchProtocol } from '@nodescript/fetch-protocol';
-import { BaseHttpServer, HttpProtocolHandler } from '@nodescript/http-server';
+import { HttpProtocolHandler } from '@nodescript/http-server';
 import { dep } from '@nodescript/mesh';
 
 import { FetchDomainImpl } from './domains/fetch.js';
-
-export class HttpServer extends BaseHttpServer {
-
-    constructor() {
-        super();
-        this.addRequestHandler(FetchProtocolHandler);
-    }
-
-}
 
 export class FetchProtocolImpl implements FetchProtocol {
     @dep() Fetch!: FetchDomainImpl;

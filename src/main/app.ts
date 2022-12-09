@@ -1,18 +1,20 @@
 import { Config, ProcessEnvConfig } from '@nodescript/config';
+import { HttpServer } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
-import { Mesh } from '@nodescript/mesh';
+import { dep, Mesh } from '@nodescript/mesh';
+import { BaseApp, StandardLogger } from '@nodescript/microservice';
 
 import { FetchDomainImpl } from './domains/fetch.js';
-import { FetchProtocolHandler, FetchProtocolImpl, HttpServer } from './http-server.js';
-import { StandardLogger } from './logger.js';
+import { FetchProtocolHandler, FetchProtocolImpl } from './handler.js';
 import { FetchCurlService } from './services/fetch.curl.js';
 import { FetchService } from './services/fetch.js';
 
-export class App {
-    mesh: Mesh;
+export class App extends BaseApp {
+
+    @dep() httpServer!: HttpServer;
 
     constructor() {
-        this.mesh = new Mesh('App');
+        super(new Mesh('App'));
         this.mesh.constant('App', this);
         this.mesh.constant('httpRequestScope', () => this.createRequestScope());
         this.mesh.service(Config, ProcessEnvConfig);
@@ -31,30 +33,12 @@ export class App {
     }
 
     async start() {
-        process.on('uncaughtException', error => {
-            this.logger.error('uncaughtException', { error });
-        });
-        process.on('unhandledRejection', error => {
-            this.logger.error('unhandledRejection', { error });
-        });
-        process.on('SIGTERM', () => this.logger.info('Received SIGTERM'));
-        process.on('SIGINT', () => this.logger.info('Received SIGINT'));
-        process.on('SIGTERM', () => this.stop());
-        process.on('SIGINT', () => this.stop());
+        this.httpServer.addRequestHandler(FetchProtocolHandler);
         await this.httpServer.start();
     }
 
     async stop() {
-        process.removeAllListeners();
         await this.httpServer.stop();
-    }
-
-    get logger() {
-        return this.mesh.resolve(Logger);
-    }
-
-    get httpServer() {
-        return this.mesh.resolve(HttpServer);
     }
 
 }
