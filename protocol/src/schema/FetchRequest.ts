@@ -1,4 +1,4 @@
-import { Schema } from '@nodescript/schema';
+import { Schema } from 'airtight';
 
 import { FetchHeaders, FetchHeadersSchema } from './FetchHeaders.js';
 import { FetchMethod, FetchMethodSchema } from './FetchMethod.js';

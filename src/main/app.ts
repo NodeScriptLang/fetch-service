@@ -1,8 +1,8 @@
 import { Config, ProcessEnvConfig } from '@nodescript/config';
 import { HttpServer } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
-import { dep, Mesh } from '@nodescript/mesh';
 import { BaseApp, StandardLogger } from '@nodescript/microservice';
+import { dep, Mesh } from 'mesh-ioc';
 
 import { FetchDomainImpl } from './FetchDomainImpl.js';
 import { FetchProtocolHandler } from './FetchProtocolHandler.js';

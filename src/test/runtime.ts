@@ -1,5 +1,5 @@
-import { dep, Mesh } from '@nodescript/mesh';
 import { config } from 'dotenv';
+import { dep, Mesh } from 'mesh-ioc';
 
 import { App } from '../main/app.js';
 import { FetchDomainImpl } from '../main/FetchDomainImpl.js';

@@ -35,15 +35,15 @@
     "author": "Boris Okunskiy",
     "license": "ISC",
     "dependencies": {
-        "@nodescript/config": "^1.0.8",
+        "@nodescript/config": "^1.1.0",
         "@nodescript/fetch-protocol": "file:protocol",
-        "@nodescript/http-server": "^0.7.0",
+        "@nodescript/http-server": "^0.8.0",
         "@nodescript/logger": "^1.4.1",
-        "@nodescript/mesh": "^3.1.3",
-        "@nodescript/microservice": "^1.0.0",
-        "@nodescript/protocomm": "^0.5.3",
-        "@nodescript/schema": "^5.2.2",
-        "dotenv": "^16.0.3"
+        "@nodescript/microservice": "^1.1.0",
+        "@nodescript/protocomm": "^0.5.5",
+        "airtight": "^5.2.3",
+        "dotenv": "^16.0.3",
+        "mesh-ioc": "^3.1.4"
     },
     "devDependencies": {
         "@nodescript/eslint-config": "^1.0.4",
