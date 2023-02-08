@@ -1,7 +1,7 @@
-import { config } from '@nodescript/config';
 import { FetchHeaders, FetchRequest, FetchResponse } from '@nodescript/fetch-protocol';
 import { Logger } from '@nodescript/logger';
 import { spawn } from 'child_process';
+import { config } from 'mesh-config';
 import { dep } from 'mesh-ioc';
 
 import { FetchService } from './FetchService.js';
