@@ -9,6 +9,7 @@ import { FetchProtocolHandler } from './FetchProtocolHandler.js';
 import { FetchProtocolImpl } from './FetchProtocolImpl.js';
 import { FetchCurlService } from './FetchService.curl.js';
 import { FetchService } from './FetchService.js';
+import { Metrics } from './Metrics.js';
 
 export class App extends BaseApp {
 
@@ -20,6 +21,8 @@ export class App extends BaseApp {
         this.mesh.service(Config, ProcessEnvConfig);
         this.mesh.service(Logger, StandardLogger);
         this.mesh.service(HttpServer);
+        this.mesh.service(Metrics);
+
     }
 
     createRequestScope() {

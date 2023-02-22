@@ -38,6 +38,7 @@
         "@nodescript/fetch-protocol": "file:protocol",
         "@nodescript/http-server": "^0.8.1",
         "@nodescript/logger": "^1.4.1",
+        "@nodescript/metrics": "^1.1.1",
         "@nodescript/microservice": "^1.1.0",
         "@nodescript/protocomm": "^0.5.5",
         "airtight": "^5.2.3",
