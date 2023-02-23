@@ -22,7 +22,6 @@ export class App extends BaseApp {
         this.mesh.service(Logger, StandardLogger);
         this.mesh.service(HttpServer);
         this.mesh.service(Metrics);
-
     }
 
     createRequestScope() {

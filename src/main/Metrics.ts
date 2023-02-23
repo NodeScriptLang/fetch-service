@@ -1,6 +1,7 @@
 import { HistogramMetric, metric } from '@nodescript/metrics';
 
 export class Metrics {
+
     @metric()
     serviceRequestLatency = new HistogramMetric<{
         service: string;
