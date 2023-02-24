@@ -14,6 +14,6 @@
     ],
     "dependencies": {
         "@nodescript/protocomm": "^0.5.5",
-        "airtight": "^5.2.3"
+        "airtight": "^5.5.2"
     }
 }
