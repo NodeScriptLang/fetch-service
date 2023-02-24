@@ -17,7 +17,7 @@ export class App extends BaseApp {
 
     constructor() {
         super(new Mesh('App'));
-        this.mesh.constant('httpRequestScope', () => this.createRequestScope());
+        this.mesh.constant(HttpServer.SCOPE, () => this.createRequestScope());
         this.mesh.service(Config, ProcessEnvConfig);
         this.mesh.service(Logger, StandardLogger);
         this.mesh.service(HttpServer);
@@ -27,6 +27,7 @@ export class App extends BaseApp {
     createRequestScope() {
         const mesh = new Mesh('Request');
         mesh.parent = this.mesh;
+        mesh.service(HttpServer.HANDLER, FetchProtocolHandler);
         mesh.service(FetchProtocolHandler);
         mesh.service(FetchDomainImpl);
         mesh.service(FetchProtocolImpl);
@@ -35,7 +36,6 @@ export class App extends BaseApp {
     }
 
     async start() {
-        this.httpServer.addRequestHandler(FetchProtocolHandler);
         await this.httpServer.start();
     }
 
