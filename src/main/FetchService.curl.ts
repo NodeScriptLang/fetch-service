@@ -31,7 +31,7 @@ export class FetchCurlService extends FetchService {
         ]);
         const { headers: responseHeaders, info } = this.parseStderr(stderr);
         const duration = Date.now() - startedAt;
-        this.metrics.serviceRequestLatency.addMillis(duration, {
+        this.metrics.requestLatency.addMillis(duration, {
             service: this.constructor.name,
             status: info.response_code,
             method: request.method,
