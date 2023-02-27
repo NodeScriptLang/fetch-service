@@ -1,9 +1,10 @@
-import { HttpServer } from '@nodescript/http-server';
+import { HttpCorsHandler, HttpMetricsHandler, HttpServer, StandardHttpHandler } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
 import { BaseApp, StandardLogger } from '@nodescript/microservice';
 import { Config, ProcessEnvConfig } from 'mesh-config';
 import { dep, Mesh } from 'mesh-ioc';
 
+import { AppHttpHandler } from './AppHttpHandler.js';
 import { FetchDomainImpl } from './FetchDomainImpl.js';
 import { FetchProtocolHandler } from './FetchProtocolHandler.js';
 import { FetchProtocolImpl } from './FetchProtocolImpl.js';
@@ -22,12 +23,15 @@ export class App extends BaseApp {
         this.mesh.service(Logger, StandardLogger);
         this.mesh.service(HttpServer);
         this.mesh.service(Metrics);
+        this.mesh.service(HttpMetricsHandler);
+        this.mesh.service(StandardHttpHandler);
+        this.mesh.service(HttpCorsHandler);
     }
 
     createRequestScope() {
         const mesh = new Mesh('Request');
         mesh.parent = this.mesh;
-        mesh.service(HttpServer.HANDLER, FetchProtocolHandler);
+        mesh.service(HttpServer.HANDLER, AppHttpHandler);
         mesh.service(FetchProtocolHandler);
         mesh.service(FetchDomainImpl);
         mesh.service(FetchProtocolImpl);
