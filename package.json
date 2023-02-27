@@ -15,7 +15,7 @@
         "dev": "npm run clean && tsc -b -w",
         "compile": "npm run clean && tsc -b",
         "lint": "eslint --ext=.js,.ts,.vue --cache .",
-        "test": "NODE_NO_WARNINGS=1 NODE_ENV=test mocha --timeout 10000",
+        "test": "NODE_NO_WARNINGS=1 NODE_ENV=test mocha",
         "build": "run-s compile",
         "version": "run-s version:*",
         "version:compile": "npm run compile",
