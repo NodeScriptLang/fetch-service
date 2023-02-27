@@ -5,10 +5,12 @@ import { config } from 'mesh-config';
 import { dep } from 'mesh-ioc';
 
 import { FetchService } from './FetchService.js';
+import { Metrics } from './Metrics.js';
 
 export class FetchCurlService extends FetchService {
 
     @dep() logger!: Logger;
+    @dep() metrics!: Metrics;
     @config({ default: 'curl' }) CURL_PATH!: string;
 
     async sendRequest(request: FetchRequest): Promise<FetchResponse> {
@@ -29,6 +31,10 @@ export class FetchCurlService extends FetchService {
         ]);
         const { headers: responseHeaders, info } = this.parseStderr(stderr);
         const duration = Date.now() - startedAt;
+        this.metrics.requestLatency.addMillis(duration, {
+            status: info.response_code,
+            method: request.method,
+        });
         this.logger.info('Request served', {
             url: request.url,
             status: info.response_code,
