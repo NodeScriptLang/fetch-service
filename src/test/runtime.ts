@@ -31,7 +31,7 @@ export class TestRuntime {
     }
 
     get baseUrl() {
-        return `http://localhost:${process.env.PORT ?? '8080'}`;
+        return `http://localhost:${process.env.HTTP_PORT ?? '8080'}`;
     }
 
 }
