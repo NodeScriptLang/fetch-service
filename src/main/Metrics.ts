@@ -6,6 +6,7 @@ export class Metrics {
     requestLatency = new HistogramMetric<{
         status: number;
         method: string;
+        error?: string;
     }>('nodescript_fetch_service_request_latency', 'NodeScript Fetch Service request latency');
 
 }

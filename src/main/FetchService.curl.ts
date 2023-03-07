@@ -15,38 +15,54 @@ export class FetchCurlService extends FetchService {
 
     async sendRequest(request: FetchRequest): Promise<FetchResponse> {
         const startedAt = Date.now();
-        const args = this.prepareArgs(request);
-        const child = spawn(this.CURL_PATH, args, {
-            stdio: 'pipe',
-        });
-        if (this.supportsBody(request.method)) {
-            const { bodyBase64 } = request;
-            const requestBody = bodyBase64 ? Buffer.from(bodyBase64, 'base64') : Buffer.alloc(0);
-            child.stdin.write(requestBody);
-            child.stdin.end();
+        try {
+            const args = this.prepareArgs(request);
+            const child = spawn(this.CURL_PATH, args, {
+                stdio: 'pipe',
+            });
+            if (this.supportsBody(request.method)) {
+                const { bodyBase64 } = request;
+                const requestBody = bodyBase64 ? Buffer.from(bodyBase64, 'base64') : Buffer.alloc(0);
+                child.stdin.write(requestBody);
+                child.stdin.end();
+            }
+            const [stdout, stderr] = await Promise.all([
+                this.readStream(child.stdout),
+                this.readStream(child.stderr),
+            ]);
+            const { headers: responseHeaders, info } = this.parseStderr(stderr);
+            const duration = Date.now() - startedAt;
+            this.metrics.requestLatency.addMillis(duration, {
+                status: info.response_code,
+                method: request.method,
+            });
+            this.logger.info('Request served', {
+                url: request.url,
+                status: info.response_code,
+                size: stdout.byteLength,
+                duration,
+            });
+            return {
+                status: info.response_code,
+                headers: responseHeaders,
+                bodyBase64: stdout.toString('base64'),
+                url: info.url_effective,
+            };
+        } catch (error: any) {
+            const duration = Date.now() - startedAt;
+            this.logger.error('Request failed', { error });
+            this.metrics.requestLatency.addMillis(duration, {
+                status: 0,
+                method: request.method,
+                error: error.name,
+            });
+            return {
+                status: 0,
+                headers: {},
+                bodyBase64: Buffer.from(`cURL error: ${error.message}`).toString('base64'),
+                url: request.url,
+            };
         }
-        const [stdout, stderr] = await Promise.all([
-            this.readStream(child.stdout),
-            this.readStream(child.stderr),
-        ]);
-        const { headers: responseHeaders, info } = this.parseStderr(stderr);
-        const duration = Date.now() - startedAt;
-        this.metrics.requestLatency.addMillis(duration, {
-            status: info.response_code,
-            method: request.method,
-        });
-        this.logger.info('Request served', {
-            url: request.url,
-            status: info.response_code,
-            size: stdout.byteLength,
-            duration,
-        });
-        return {
-            status: info.response_code,
-            headers: responseHeaders,
-            bodyBase64: stdout.toString('base64'),
-            url: info.url_effective,
-        };
     }
 
     private supportsBody(method: string) {
