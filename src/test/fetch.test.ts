@@ -1,4 +1,4 @@
-import { FetchMethod } from '@nodescript/fetch-protocol';
+import { FetchMethod } from '@nodescript/adapter-fetch-protocol';
 import assert from 'assert';
 
 import { runtime } from './runtime.js';

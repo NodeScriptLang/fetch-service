@@ -1,4 +1,4 @@
-import { FetchProtocol, fetchProtocol } from '@nodescript/fetch-protocol';
+import { FetchProtocol, fetchProtocol } from '@nodescript/adapter-fetch-protocol';
 import { HttpProtocolHandler } from '@nodescript/http-server';
 import { dep } from 'mesh-ioc';
 

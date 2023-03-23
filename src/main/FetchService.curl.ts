@@ -1,4 +1,4 @@
-import { FetchHeaders, FetchRequest, FetchResponse } from '@nodescript/fetch-protocol';
+import { FetchHeaders, FetchRequest, FetchResponse } from '@nodescript/adapter-fetch-protocol';
 import { Logger } from '@nodescript/logger';
 import { spawn } from 'child_process';
 import { config } from 'mesh-config';

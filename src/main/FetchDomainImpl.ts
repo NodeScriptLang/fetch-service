@@ -1,4 +1,4 @@
-import { FetchDomain, FetchRequest, FetchResponse } from '@nodescript/fetch-protocol';
+import { FetchDomain, FetchRequest, FetchResponse } from '@nodescript/adapter-fetch-protocol';
 import { dep } from 'mesh-ioc';
 
 import { FetchService } from './FetchService.js';
