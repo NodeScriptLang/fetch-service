@@ -1,7 +1,7 @@
 {
-    "name": "@nodescript/fetch-service",
+    "name": "@nodescript/adapter-fetch",
     "version": "0.4.6",
-    "description": "Fetch Service for sending HTTP requests",
+    "description": "Fetch Adapter for sending HTTP requests",
     "type": "module",
     "sideEffects": false,
     "private": true,
@@ -29,13 +29,13 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/NodeScriptLang/fetch-service.git"
+        "url": "git+ssh://git@github.com/NodeScriptLang/adapter-fetch.git"
     },
     "keywords": [],
     "author": "Boris Okunskiy",
     "license": "ISC",
     "dependencies": {
-        "@nodescript/fetch-protocol": "file:protocol",
+        "@nodescript/adapter-fetch-protocol": "file:protocol",
         "@nodescript/http-server": "^1.1.2",
         "@nodescript/logger": "^1.4.1",
         "@nodescript/metrics": "^1.1.1",

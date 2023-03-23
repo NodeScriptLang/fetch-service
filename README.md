@@ -1,4 +1,4 @@
-# Fetch Service
+# Fetch Adapter
 
 Powers "Http Request" node functionality.
 
