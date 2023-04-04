@@ -10,6 +10,7 @@ export interface FetchRequest {
     bodyBase64?: string;
     proxy?: string;
     followRedirects?: boolean;
+    retries?: number;
 }
 
 export const FetchRequestSchema = new Schema<FetchRequest>({
@@ -22,5 +23,6 @@ export const FetchRequestSchema = new Schema<FetchRequest>({
         bodyBase64: { type: 'string', optional: true },
         proxy: { type: 'string', optional: true },
         followRedirects: { type: 'boolean', optional: true },
+        retries: { type: 'number', optional: true },
     }
 });

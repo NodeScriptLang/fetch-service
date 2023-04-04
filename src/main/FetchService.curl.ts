@@ -90,6 +90,10 @@ export class FetchCurlService extends FetchService {
         if (request.proxy) {
             args.push('-x', request.proxy);
         }
+        if (request.retries) {
+            args.push('--retry', String(request.retries));
+            args.push('--retry-connrefused');
+        }
         args.push(request.url);
         return args;
     }
