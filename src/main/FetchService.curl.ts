@@ -35,6 +35,7 @@ export class FetchCurlService extends FetchService {
             this.metrics.requestLatency.addMillis(duration, {
                 status: info.response_code,
                 method: request.method,
+                hostname: this.tryParseHostname(request.url),
             });
             this.logger.info('Request served', {
                 url: request.url,
@@ -54,6 +55,7 @@ export class FetchCurlService extends FetchService {
             this.metrics.requestLatency.addMillis(duration, {
                 status: 0,
                 method: request.method,
+                hostname: this.tryParseHostname(request.url),
                 error: error.name,
             });
             return {
@@ -124,6 +126,15 @@ export class FetchCurlService extends FetchService {
             headers: JSON.parse(headersText),
             info: JSON.parse(infoText),
         };
+    }
+
+    private tryParseHostname(url: string) {
+        try {
+            const { hostname } = new URL(url);
+            return hostname;
+        } catch (error) {
+            return '<invalid url>';
+        }
     }
 
 }
