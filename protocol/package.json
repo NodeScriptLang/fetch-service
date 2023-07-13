@@ -13,7 +13,7 @@
         "out/**/*"
     ],
     "dependencies": {
-        "@nodescript/protocomm": "^0.6.2",
-        "airtight": "^5.6.0"
+        "@nodescript/protocomm": "^0.7.0",
+        "airtight": "^5.7.0"
     }
 }
