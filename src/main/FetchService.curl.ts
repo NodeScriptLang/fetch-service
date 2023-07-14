@@ -1,4 +1,5 @@
 import { FetchHeaders, FetchRequest, FetchResponse } from '@nodescript/adapter-fetch-protocol';
+import { ClientError } from '@nodescript/errors';
 import { Logger } from '@nodescript/logger';
 import { spawn } from 'child_process';
 import { config } from 'mesh-config';
@@ -96,6 +97,15 @@ export class FetchCurlService extends FetchService {
             args.push('--retry', String(request.retries));
             args.push('--retry-connrefused');
         }
+        if (request.ignoreSslErrors) {
+            args.push('-k');
+        }
+        for (const resolveArg of request.resolve ?? []) {
+            if (!this.isValidResolveArg(resolveArg)) {
+                throw new ClientError('Unsupported resolve argument');
+            }
+            args.push(`--resolve ${resolveArg}`);
+        }
         args.push(request.url);
         return args;
     }
@@ -135,6 +145,14 @@ export class FetchCurlService extends FetchService {
         } catch (error) {
             return '<invalid url>';
         }
+    }
+
+    private isValidResolveArg(resolveArg: string) {
+        // https://curl.se/libcurl/c/CURLOPT_RESOLVE.html
+        // Each resolve argument must be a string in the following format:
+        // [+]HOST:PORT:ADDRESS[,ADDRESS]
+        return /^[a-z0-9.-]+:\d+:[0-9a-f.:]+(,[0-9a-f.:]+)*$/i
+            .test(resolveArg);
     }
 
 }
