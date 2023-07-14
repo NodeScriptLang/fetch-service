@@ -36,6 +36,7 @@
     "license": "ISC",
     "dependencies": {
         "@nodescript/adapter-fetch-protocol": "file:protocol",
+        "@nodescript/errors": "^1.1.2",
         "@nodescript/http-server": "^1.3.0",
         "@nodescript/logger": "^1.4.2",
         "@nodescript/metrics": "^1.1.1",

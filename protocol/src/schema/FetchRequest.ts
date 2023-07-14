@@ -11,6 +11,8 @@ export interface FetchRequest {
     proxy?: string;
     followRedirects?: boolean;
     retries?: number;
+    resolve?: string[];
+    insecure?: boolean;
 }
 
 export const FetchRequestSchema = new Schema<FetchRequest>({
@@ -24,5 +26,14 @@ export const FetchRequestSchema = new Schema<FetchRequest>({
         proxy: { type: 'string', optional: true },
         followRedirects: { type: 'boolean', optional: true },
         retries: { type: 'number', optional: true },
-    }
+        resolve: {
+            type: 'array',
+            items: { type: 'string' },
+            optional: true,
+        },
+        insecure: {
+            type: 'boolean',
+            optional: true,
+        },
+    },
 });
