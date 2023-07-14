@@ -12,7 +12,7 @@ export interface FetchRequest {
     followRedirects?: boolean;
     retries?: number;
     resolve?: string[];
-    ignoreSslErrors?: boolean;
+    insecure?: boolean;
 }
 
 export const FetchRequestSchema = new Schema<FetchRequest>({
@@ -31,7 +31,7 @@ export const FetchRequestSchema = new Schema<FetchRequest>({
             items: { type: 'string' },
             optional: true,
         },
-        ignoreSslErrors: {
+        insecure: {
             type: 'boolean',
             optional: true,
         },

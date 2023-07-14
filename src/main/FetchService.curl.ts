@@ -97,8 +97,8 @@ export class FetchCurlService extends FetchService {
             args.push('--retry', String(request.retries));
             args.push('--retry-connrefused');
         }
-        if (request.ignoreSslErrors) {
-            args.push('-k');
+        if (request.insecure) {
+            args.push('--insecure');
         }
         for (const resolveArg of request.resolve ?? []) {
             if (!this.isValidResolveArg(resolveArg)) {
