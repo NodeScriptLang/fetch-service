@@ -1,6 +1,6 @@
 {
     "name": "@nodescript/adapter-fetch",
-    "version": "1.5.0",
+    "version": "2.0.0-0",
     "description": "Fetch Adapter for sending HTTP requests",
     "type": "module",
     "sideEffects": false,
