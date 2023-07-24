@@ -34,10 +34,10 @@ export class HttpFetchHandler extends HttpRouter {
     @dep() private metrics!: Metrics;
 
     routes: HttpRoute[] = [
-        ['POST', `${this.FETCH_PREFIX}/request`, ctx => this.sendRequest(ctx)],
+        ['POST', `${this.FETCH_PREFIX}/request`, ctx => this.handleRequest(ctx)],
     ];
 
-    async sendRequest(ctx: HttpContext) {
+    async handleRequest(ctx: HttpContext) {
         const {
             method,
             url,
