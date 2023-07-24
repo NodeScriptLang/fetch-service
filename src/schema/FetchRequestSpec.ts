@@ -9,6 +9,7 @@ export interface FetchRequestSpec {
     headers: FetchHeaders;
     proxy?: string;
     followRedirects?: boolean;
+    retries?: number;
 }
 
 export const FetchRequestSpecSchema = new Schema<FetchRequestSpec>({
@@ -19,5 +20,6 @@ export const FetchRequestSpecSchema = new Schema<FetchRequestSpec>({
         headers: FetchHeadersSchema.schema,
         proxy: { type: 'string', optional: true },
         followRedirects: { type: 'boolean', optional: true },
+        retries: { type: 'number', optional: true },
     },
 });
