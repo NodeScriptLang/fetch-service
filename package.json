@@ -12,7 +12,9 @@
         "clean": "run-p clean:*",
         "clean:self": "rm -rf out *.tsbuildinfo",
         "clean:workspaces": "npm run clean --workspaces --if-present",
-        "dev": "npm run clean && tsc -b -w",
+        "dev": "npm run compile && run-p dev:*",
+        "dev:ts": "tsc -b -w",
+        "dev:http": "NODE_ENV=development node ./out/bin/http.js",
         "compile": "npm run clean && tsc -b",
         "lint": "eslint --ext=.js,.ts,.vue --cache .",
         "test": "NODE_NO_WARNINGS=1 NODE_ENV=test mocha",
@@ -37,7 +39,7 @@
     "dependencies": {
         "@nodescript/adapter-fetch-protocol": "file:protocol",
         "@nodescript/errors": "^1.1.2",
-        "@nodescript/http-server": "^1.3.0",
+        "@nodescript/http-server": "^1.4.1",
         "@nodescript/logger": "^1.4.2",
         "@nodescript/metrics": "^1.1.1",
         "@nodescript/microservice": "^1.2.0",
@@ -45,12 +47,13 @@
         "airtight": "^5.7.0",
         "dotenv": "^16.0.3",
         "mesh-config": "^1.0.0",
-        "mesh-ioc": "^3.2.0"
+        "mesh-ioc": "^3.2.0",
+        "undici": "^5.22.1"
     },
     "devDependencies": {
         "@nodescript/eslint-config": "^1.0.4",
         "@types/mocha": "^10.0.1",
-        "@types/node": "^18.14.1",
+        "@types/node": "^20.4.4",
         "eslint": "^8.34.0",
         "mocha": "^10.2.0",
         "npm-run-all": "^4.1.5",
