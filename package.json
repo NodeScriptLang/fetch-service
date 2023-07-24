@@ -39,7 +39,7 @@
     "dependencies": {
         "@nodescript/adapter-fetch-protocol": "file:protocol",
         "@nodescript/errors": "^1.1.2",
-        "@nodescript/http-server": "^1.4.1",
+        "@nodescript/http-server": "^1.4.2",
         "@nodescript/logger": "^1.4.2",
         "@nodescript/metrics": "^1.1.1",
         "@nodescript/microservice": "^1.2.0",

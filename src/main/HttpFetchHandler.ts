@@ -1,5 +1,4 @@
 import { FetchMethod } from '@nodescript/adapter-fetch-protocol';
-import { ClientError } from '@nodescript/errors';
 import { HttpContext, HttpRoute, HttpRouter } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
 import { config } from 'mesh-config';
@@ -9,21 +8,6 @@ import { Dispatcher, getGlobalDispatcher, ProxyAgent, request } from 'undici';
 import { FetchRequestSpec, FetchRequestSpecSchema } from '../schema/FetchRequestSpec.js';
 import { Metrics } from './Metrics.js';
 import { parseJson } from './util.js';
-
-const CLIENT_ERRORS = [
-    'UND_ERR_CONNECT_TIMEOUT',
-    'UND_ERR_HEADERS_TIMEOUT',
-    'UND_ERR_HEADERS_OVERFLOW',
-    'UND_ERR_BODY_TIMEOUT',
-    'UND_ERR_RESPONSE_STATUS_CODE',
-    'UND_ERR_INVALID_ARG',
-    'UND_ERR_INVALID_RETURN_VALUE',
-    'UND_ERR_ABORTED',
-    'UND_ERR_REQ_CONTENT_LENGTH_MISMATCH',
-    'UND_ERR_RES_CONTENT_LENGTH_MISMATCH',
-    'UND_ERR_NOT_SUPPORTED',
-    'UND_ERR_RES_EXCEEDED_MAX_SIZE',
-];
 
 export class HttpFetchHandler extends HttpRouter {
 
@@ -79,12 +63,8 @@ export class HttpFetchHandler extends HttpRouter {
                 error: error.name,
                 code: error.code,
             });
-            if (CLIENT_ERRORS.includes(error.code)) {
-                this.logger.warn('Request failed', { error });
-                throw new ClientError(error.message);
-            }
             this.logger.warn('Request failed', { error });
-            throw error;
+            throw new FetchError(error.message, error.code);
         }
     }
 
@@ -136,4 +116,17 @@ function prepHeaders(headers: Record<string, string | string[] | undefined>) {
         result[k.toLowerCase()] = v;
     }
     return result;
+}
+
+export class FetchError extends Error {
+    override name = this.constructor.name;
+    status = 500;
+    details = {};
+
+    constructor(message: string, code?: string) {
+        super(message || code || 'Request failed');
+        this.details = {
+            code,
+        };
+    }
 }
