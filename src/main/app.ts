@@ -10,6 +10,7 @@ import { FetchProtocolHandler } from './FetchProtocolHandler.js';
 import { FetchProtocolImpl } from './FetchProtocolImpl.js';
 import { FetchCurlService } from './FetchService.curl.js';
 import { FetchService } from './FetchService.js';
+import { HttpFetchHandler } from './HttpFetchHandler.js';
 import { Metrics } from './Metrics.js';
 
 export class App extends BaseApp {
@@ -26,6 +27,7 @@ export class App extends BaseApp {
         this.mesh.service(HttpMetricsHandler);
         this.mesh.service(StandardHttpHandler);
         this.mesh.service(HttpCorsHandler);
+        this.mesh.service(HttpFetchHandler);
     }
 
     createRequestScope() {
