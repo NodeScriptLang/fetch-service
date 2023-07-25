@@ -1,6 +1,6 @@
 {
     "name": "@nodescript/adapter-fetch-protocol",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Fetch Adapter Protocol",
     "type": "module",
     "sideEffects": false,
