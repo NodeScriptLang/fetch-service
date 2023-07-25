@@ -31,7 +31,7 @@ export class HttpFetchHandler extends HttpRouter {
         } = this.parseRequestSpec(ctx);
         try {
             const dispatcher = this.getDispatcher({ proxy });
-            const maxRedirections = followRedirects ? undefined : 0;
+            const maxRedirections = followRedirects ? 10 : 0;
             const reqHeaders = prepHeaders({
                 'user-agent': 'NodeScript / Fetch v1',
                 ...headers
@@ -59,6 +59,7 @@ export class HttpFetchHandler extends HttpRouter {
                 hostname: this.tryParseHostname(url),
             });
         } catch (error: any) {
+            error.stack = '';
             this.metrics.errors.incr(1, {
                 error: error.name,
                 code: error.code,
@@ -73,7 +74,7 @@ export class HttpFetchHandler extends HttpRouter {
             method: ctx.getRequestHeader('x-fetch-method') as FetchMethod,
             url: ctx.getRequestHeader('x-fetch-url'),
             headers: parseJson(ctx.getRequestHeader('x-fetch-headers'), {}),
-            followRedirects: ctx.getRequestHeader('x-fetch-follow-redirects') === 'true',
+            followRedirects: ctx.getRequestHeader('x-fetch-follow-redirects') !== 'false',
             proxy: ctx.getRequestHeader('x-fetch-proxy', '') || undefined,
             retries: Number(ctx.getRequestHeader('x-fetch-retries', '')) || 1,
         });
@@ -128,5 +129,6 @@ export class FetchError extends Error {
         this.details = {
             code,
         };
+        this.stack = '';
     }
 }
