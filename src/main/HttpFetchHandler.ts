@@ -43,6 +43,7 @@ export class HttpFetchHandler extends HttpRouter {
                 body: ctx.request,
                 maxRedirections,
             });
+            const size = Number(res.headers['content-length']) || 0;
             ctx.status = 200;
             ctx.addResponseHeaders({
                 'x-fetch-status': [String(res.statusCode)],
@@ -52,8 +53,14 @@ export class HttpFetchHandler extends HttpRouter {
             this.logger.info('Request served', {
                 url,
                 status: res.statusCode,
+                size,
             });
             this.metrics.requestLatency.addMillis(Date.now() - ctx.startedAt, {
+                status: res.statusCode,
+                method,
+                hostname: this.tryParseHostname(url),
+            });
+            this.metrics.responseSize.incr(size, {
                 status: res.statusCode,
                 method,
                 hostname: this.tryParseHostname(url),

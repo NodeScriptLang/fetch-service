@@ -11,6 +11,13 @@ export class Metrics {
     }>('nodescript_fetch_service_request_latency', 'NodeScript Fetch Service request latency');
 
     @metric()
+    responseSize = new CounterMetric<{
+        status: number;
+        method: string;
+        hostname: string;
+    }>('nodescript_fetch_service_response_size', 'NodeScript Fetch Service response size');
+
+    @metric()
     errors = new CounterMetric<{
         error: string;
         code: string;
