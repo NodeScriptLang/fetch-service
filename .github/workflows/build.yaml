@@ -9,8 +9,8 @@ jobs:
   build:
     uses: ubio/github-actions/.github/workflows/ci-build.yaml@master
     with:
-      name: NodeScript Fetch Adapter
-      image: gcr.io/automation-cloud-registry/nodescript-adapter-fetch
+      name: NodeScript Fetch Service
+      image: gcr.io/automation-cloud-registry/nodescript-fetch-service
       ref: ${{ github.ref }}
       file: Dockerfile
     secrets:
@@ -22,6 +22,6 @@ jobs:
     needs: build
     uses: ubio/github-actions/.github/workflows/cd-dispatch.yaml@master
     with:
-      event_name: built-nodescript-adapter-fetch
+      event_name: built-nodescript-fetch-service
     secrets:
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}

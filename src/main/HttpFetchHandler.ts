@@ -1,10 +1,10 @@
-import { FetchMethod } from '@nodescript/adapter-fetch-protocol';
 import { HttpContext, HttpRoute, HttpRouter } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
 import { config } from 'mesh-config';
 import { dep } from 'mesh-ioc';
 import { Dispatcher, getGlobalDispatcher, ProxyAgent, request } from 'undici';
 
+import { FetchMethod } from '../schema/FetchMethod.js';
 import { FetchRequestSpec, FetchRequestSpecSchema } from '../schema/FetchRequestSpec.js';
 import { Metrics } from './Metrics.js';
 import { parseJson } from './util.js';

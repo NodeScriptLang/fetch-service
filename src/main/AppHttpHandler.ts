@@ -1,7 +1,6 @@
 import { HttpChain, HttpCorsHandler, HttpHandler, HttpMetricsHandler, StandardHttpHandler } from '@nodescript/http-server';
 import { dep } from 'mesh-ioc';
 
-import { FetchProtocolHandler } from './FetchProtocolHandler.js';
 import { HttpFetchHandler } from './HttpFetchHandler.js';
 
 export class AppHttpHandler extends HttpChain {
@@ -9,7 +8,6 @@ export class AppHttpHandler extends HttpChain {
     @dep() private standardHttpHandler!: StandardHttpHandler;
     @dep() private corsHandler!: HttpCorsHandler;
     @dep() private metricsHandler!: HttpMetricsHandler;
-    @dep() private fetchProtocolHandler!: FetchProtocolHandler;
     @dep() private httpFetchHandler!: HttpFetchHandler;
 
     handlers: HttpHandler[] = [
@@ -17,7 +15,6 @@ export class AppHttpHandler extends HttpChain {
         this.corsHandler,
         this.metricsHandler,
         this.httpFetchHandler,
-        this.fetchProtocolHandler,
     ];
 
 }

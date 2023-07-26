@@ -1,7 +1,13 @@
 {
-    "files": [],
-    "references": [
-        { "path": "./tsconfig.app.json" },
-        { "path": "./protocol/tsconfig.json" }
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "out",
+        "lib": [
+            "DOM"
+        ]
+    },
+    "include": [
+        "src",
     ]
 }

@@ -11,11 +11,6 @@ FROM node:18.9-slim
 
 ENV NODE_ENV production
 
-RUN apt-get update && apt-get install -y wget
-RUN wget "https://github.com/moparisthebest/static-curl/releases/download/v8.1.2/curl-amd64"
-RUN mv ./curl-amd64 /usr/local/bin/curl && chmod +x /usr/local/bin/curl
-ENV CURL_PATH /usr/local/bin/curl
-
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
 USER node

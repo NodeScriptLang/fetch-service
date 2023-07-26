@@ -6,11 +6,6 @@ import { dep, Mesh } from 'mesh-ioc';
 
 import { AppConfig } from './AppConfig.js';
 import { AppHttpHandler } from './AppHttpHandler.js';
-import { FetchDomainImpl } from './FetchDomainImpl.js';
-import { FetchProtocolHandler } from './FetchProtocolHandler.js';
-import { FetchProtocolImpl } from './FetchProtocolImpl.js';
-import { FetchCurlService } from './FetchService.curl.js';
-import { FetchService } from './FetchService.js';
 import { HttpFetchHandler } from './HttpFetchHandler.js';
 import { Metrics } from './Metrics.js';
 
@@ -35,10 +30,6 @@ export class App extends BaseApp {
         const mesh = new Mesh('Request');
         mesh.parent = this.mesh;
         mesh.service(HttpServer.HANDLER, AppHttpHandler);
-        mesh.service(FetchProtocolHandler);
-        mesh.service(FetchDomainImpl);
-        mesh.service(FetchProtocolImpl);
-        mesh.service(FetchService, FetchCurlService);
         return mesh;
     }
 

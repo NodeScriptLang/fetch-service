@@ -1,17 +1,12 @@
 {
-    "name": "@nodescript/adapter-fetch",
+    "name": "@nodescript/fetch-service",
     "version": "2.0.2",
-    "description": "Fetch Adapter for sending HTTP requests",
+    "description": "Fetch Service for sending HTTP requests",
     "type": "module",
     "sideEffects": false,
     "private": true,
-    "workspaces": [
-        "protocol"
-    ],
     "scripts": {
-        "clean": "run-p clean:*",
-        "clean:self": "rm -rf out *.tsbuildinfo",
-        "clean:workspaces": "npm run clean --workspaces --if-present",
+        "clean": "rm -rf out *.tsbuildinfo",
         "dev": "npm run compile && run-p dev:*",
         "dev:ts": "tsc -b -w",
         "dev:http": "NODE_ENV=development node ./out/bin/http.js",
@@ -21,23 +16,19 @@
         "build": "run-s compile",
         "version": "run-s version:*",
         "version:compile": "npm run compile",
-        "version:workspaces": "npm exec --workspaces -- npm version $npm_package_version && git add .",
-        "postversion": "run-s postversion:*",
-        "postversion:push": "git push --tags origin main",
-        "postversion:publish-protocol": "cd protocol && npm publish --access=public"
+        "postversion": "git push --tags origin main"
     },
     "pre-commit": [
         "lint"
     ],
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/NodeScriptLang/adapter-fetch.git"
+        "url": "git+ssh://git@github.com/NodeScriptLang/fetch-service.git"
     },
     "keywords": [],
     "author": "Boris Okunskiy",
     "license": "ISC",
     "dependencies": {
-        "@nodescript/adapter-fetch-protocol": "file:protocol",
         "@nodescript/errors": "^1.1.2",
         "@nodescript/http-server": "^1.4.3",
         "@nodescript/logger": "^1.4.2",

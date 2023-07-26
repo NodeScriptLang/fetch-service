@@ -1,12 +1,5 @@
-# Fetch Adapter
+# Fetch Service
 
 Powers "Http Request" node functionality.
 
-Allows sending HTTP requests indirectly, bypasing browsers' SameOrigin policies and eliminating associated issues.
-
-## Development
-
-Make sure you have the following installed:
-
-- Node 18
-- cUrl 7.84.0
+Allows sending HTTP requests from Node.js backend, bypasing browsers' SameOrigin policies and eliminating associated issues.

@@ -16,12 +16,6 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '18'
-    - name: download curl
-      run: wget "https://github.com/moparisthebest/static-curl/releases/download/${CURL_VERSION}/curl-amd64"
-      env:
-        CURL_VERSION: v7.84.0
-    - name: install curl
-      run: mv ./curl-amd64 /usr/local/bin/curl && chmod +x /usr/local/bin/curl
     - run: npm ci
     - run: npm run lint
     - run: npm run compile

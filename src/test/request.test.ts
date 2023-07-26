@@ -4,6 +4,9 @@ import { runtime } from './runtime.js';
 
 describe('/request', () => {
 
+    beforeEach(() => runtime.setup());
+    afterEach(() => runtime.teardown());
+
     it('sends GET request', async () => {
         runtime.testHttpServer.requestHandler = (req, res) => {
             assert.strictEqual(req.url, '/foo');
