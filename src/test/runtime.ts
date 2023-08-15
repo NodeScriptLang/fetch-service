@@ -1,11 +1,7 @@
-import { config } from 'dotenv';
 import { dep } from 'mesh-ioc';
 
 import { App } from '../main/app.js';
 import { TestHttpServer } from './test-server.js';
-
-config({ path: '.env' });
-config({ path: '.env.test' });
 
 export class TestRuntime {
     app = new App();
@@ -16,7 +12,6 @@ export class TestRuntime {
         this.app = new App();
         this.app.mesh.connect(this);
         this.app.mesh.service(TestHttpServer);
-
         await this.app.start();
         await this.testHttpServer.start();
     }

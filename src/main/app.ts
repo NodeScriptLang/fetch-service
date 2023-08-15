@@ -33,11 +33,13 @@ export class App extends BaseApp {
         return mesh;
     }
 
-    async start() {
+    override async start() {
+        await super.start();
         await this.httpServer.start();
     }
 
-    async stop() {
+    override async stop() {
+        await super.stop();
         await this.httpServer.stop();
     }
 
