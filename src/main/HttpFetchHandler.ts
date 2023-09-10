@@ -2,7 +2,7 @@ import { HttpContext, HttpRoute, HttpRouter } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
 import { config } from 'mesh-config';
 import { dep } from 'mesh-ioc';
-import { Dispatcher, getGlobalDispatcher, ProxyAgent, request } from 'undici';
+import { Agent, Dispatcher, getGlobalDispatcher, ProxyAgent, request } from 'undici';
 
 import { FetchMethod } from '../schema/FetchMethod.js';
 import { FetchRequestSpec, FetchRequestSpecSchema } from '../schema/FetchRequestSpec.js';
@@ -28,9 +28,10 @@ export class HttpFetchHandler extends HttpRouter {
             headers,
             followRedirects,
             proxy,
+            connectOptions,
         } = this.parseRequestSpec(ctx);
         try {
-            const dispatcher = this.getDispatcher({ proxy });
+            const dispatcher = this.getDispatcher({ proxy, connectOptions });
             const maxRedirections = followRedirects ? 10 : 0;
             const reqHeaders = prepHeaders({
                 'user-agent': 'NodeScript / Fetch v1',
@@ -77,6 +78,7 @@ export class HttpFetchHandler extends HttpRouter {
     }
 
     private parseRequestSpec(ctx: HttpContext): FetchRequestSpec {
+        const connectOptions = ctx.getRequestHeader('x-fetch-connect-options', '');
         return FetchRequestSpecSchema.create({
             method: ctx.getRequestHeader('x-fetch-method') as FetchMethod,
             url: ctx.getRequestHeader('x-fetch-url'),
@@ -84,10 +86,11 @@ export class HttpFetchHandler extends HttpRouter {
             followRedirects: ctx.getRequestHeader('x-fetch-follow-redirects') !== 'false',
             proxy: ctx.getRequestHeader('x-fetch-proxy', '') || undefined,
             retries: Number(ctx.getRequestHeader('x-fetch-retries', '')) || 1,
+            connectOptions: connectOptions ? parseJson(connectOptions, {}) : undefined,
         });
     }
 
-    private getDispatcher(opts: { proxy?: string }): Dispatcher {
+    private getDispatcher(opts: { proxy?: string; connectOptions?: any }): Dispatcher {
         if (opts.proxy) {
             const proxyUrl = new URL(opts.proxy);
             const auth = (proxyUrl.username || proxyUrl.password) ?
@@ -95,6 +98,16 @@ export class HttpFetchHandler extends HttpRouter {
             return new ProxyAgent({
                 uri: opts.proxy,
                 token: auth,
+                connect: {
+                    ...opts.connectOptions
+                },
+            });
+        }
+        if (opts.connectOptions) {
+            return new Agent({
+                connect: {
+                    ...opts.connectOptions,
+                },
             });
         }
         return getGlobalDispatcher();

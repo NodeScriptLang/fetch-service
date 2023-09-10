@@ -10,6 +10,7 @@ export interface FetchRequestSpec {
     proxy?: string;
     followRedirects?: boolean;
     retries?: number;
+    connectOptions?: any;
 }
 
 export const FetchRequestSpecSchema = new Schema<FetchRequestSpec>({
@@ -21,5 +22,6 @@ export const FetchRequestSpecSchema = new Schema<FetchRequestSpec>({
         proxy: { type: 'string', optional: true },
         followRedirects: { type: 'boolean', optional: true },
         retries: { type: 'number', optional: true },
+        connectOptions: { type: 'any', optional: true },
     },
 });
