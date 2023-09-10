@@ -78,7 +78,6 @@ export class HttpFetchHandler extends HttpRouter {
     }
 
     private parseRequestSpec(ctx: HttpContext): FetchRequestSpec {
-        const connectOptions = ctx.getRequestHeader('x-fetch-connect-options', '');
         return FetchRequestSpecSchema.create({
             method: ctx.getRequestHeader('x-fetch-method') as FetchMethod,
             url: ctx.getRequestHeader('x-fetch-url'),
@@ -86,11 +85,11 @@ export class HttpFetchHandler extends HttpRouter {
             followRedirects: ctx.getRequestHeader('x-fetch-follow-redirects') !== 'false',
             proxy: ctx.getRequestHeader('x-fetch-proxy', '') || undefined,
             retries: Number(ctx.getRequestHeader('x-fetch-retries', '')) || 1,
-            connectOptions: connectOptions ? parseJson(connectOptions, {}) : undefined,
+            connectOptions: parseJson(ctx.getRequestHeader('x-fetch-connect-options', ''), {}),
         });
     }
 
-    private getDispatcher(opts: { proxy?: string; connectOptions?: any }): Dispatcher {
+    private getDispatcher(opts: { proxy?: string; connectOptions: object }): Dispatcher {
         if (opts.proxy) {
             const proxyUrl = new URL(opts.proxy);
             const auth = (proxyUrl.username || proxyUrl.password) ?
@@ -103,7 +102,7 @@ export class HttpFetchHandler extends HttpRouter {
                 },
             });
         }
-        if (opts.connectOptions) {
+        if (Object.keys(opts.connectOptions).length > 0) {
             return new Agent({
                 connect: {
                     ...opts.connectOptions,
