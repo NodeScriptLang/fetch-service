@@ -31,7 +31,7 @@
     "dependencies": {
         "@nodescript/errors": "^1.1.2",
         "@nodescript/http-server": "^1.6.0",
-        "@nodescript/logger": "^2.0.0",
+        "@nodescript/logger": "^2.0.1",
         "@nodescript/metrics": "^1.1.1",
         "@nodescript/microframework": "^1.7.0",
         "@nodescript/protocomm": "^1.0.0",
