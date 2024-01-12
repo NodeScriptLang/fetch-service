@@ -30,10 +30,10 @@
     "license": "ISC",
     "dependencies": {
         "@nodescript/errors": "^1.1.2",
-        "@nodescript/http-server": "^1.5.0",
-        "@nodescript/logger": "^1.4.2",
+        "@nodescript/http-server": "^1.6.0",
+        "@nodescript/logger": "^2.0.0",
         "@nodescript/metrics": "^1.1.1",
-        "@nodescript/microframework": "^1.6.0",
+        "@nodescript/microframework": "^1.7.0",
         "@nodescript/protocomm": "^1.0.0",
         "airtight": "^5.7.0",
         "dotenv": "^16.0.3",
