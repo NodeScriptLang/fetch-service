@@ -3,10 +3,10 @@ import { Logger } from '@nodescript/logger';
 import { dep } from 'mesh-ioc';
 import { Agent, Dispatcher, getGlobalDispatcher, ProxyAgent, request } from 'undici';
 
-import { FetchMethod } from '../schema/FetchMethod.js';
-import { FetchRequestSpec, FetchRequestSpecSchema } from '../schema/FetchRequestSpec.js';
+import { FetchMethod } from '../../schema/FetchMethod.js';
+import { FetchRequestSpec, FetchRequestSpecSchema } from '../../schema/FetchRequestSpec.js';
+import { parseJson } from '../util.js';
 import { Metrics } from './Metrics.js';
-import { parseJson } from './util.js';
 
 export class ForwardRequestHandler extends HttpRouter {
 

@@ -10,8 +10,17 @@ export class FetchHttpHandler extends HttpChain {
     @dep() private metricsHandler!: HttpMetricsHandler;
     @dep() private forwardRequestHandler!: ForwardRequestHandler;
 
+    private corsConfigHandler: HttpHandler = {
+        async handle(ctx, next) {
+            ctx.state.corsExposeHeaders = 'Content-Length,Date,X-Fetch-Status,X-Fetch-Headers';
+            ctx.state.corsAllowCredentials = false;
+            await next();
+        },
+    };
+
     handlers: HttpHandler[] = [
         this.standardHttpHandler,
+        this.corsConfigHandler,
         this.corsHandler,
         this.metricsHandler,
         this.forwardRequestHandler,

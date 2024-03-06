@@ -69,6 +69,34 @@ describe('/request', () => {
         assert.strictEqual(res.status, 200);
     });
 
+    it('returns CORS headers in response when Origin is sent', async () => {
+        runtime.testHttpServer.requestHandler = (req, res) => {
+            assert.strictEqual(req.url, '/foo');
+            assert.strictEqual(req.headers['host'], '127.0.0.1:8099');
+            res.writeHead(200, {
+                'Content-Type': 'text/plain',
+                'X-Response-Time': 42,
+                'Cache-Control': ['private', 'no-cache'],
+            });
+            res.end('Hello!');
+        };
+        const res = await fetch(runtime.baseUrl + '/request', {
+            method: 'POST',
+            headers: {
+                'origin': 'http://my.origin',
+                'x-fetch-method': 'GET',
+                'x-fetch-url': 'http://127.0.0.1:8099/foo'
+            },
+        });
+        const body = await res.text();
+        assert.strictEqual(res.status, 200);
+        assert.strictEqual(body, 'Hello!');
+        assert.strictEqual(res.headers.get('access-control-allow-origin'), 'http://my.origin');
+        assert.strictEqual(res.headers.get('access-control-max-age'), '3600');
+        assert.strictEqual(res.headers.get('access-control-allow-credentials'), 'false');
+        assert.strictEqual(res.headers.get('access-control-expose-headers'), 'Content-Length,Date,X-Fetch-Status,X-Fetch-Headers');
+    });
+
     describe('redirects', () => {
 
         beforeEach(() => {
