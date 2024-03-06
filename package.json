@@ -30,7 +30,7 @@
     "license": "ISC",
     "dependencies": {
         "@nodescript/errors": "^1.1.2",
-        "@nodescript/http-server": "^2.0.0",
+        "@nodescript/http-server": "^2.1.1",
         "@nodescript/logger": "^2.0.2",
         "@nodescript/metrics": "^1.1.1",
         "@nodescript/microframework": "^1.7.2",

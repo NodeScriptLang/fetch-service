@@ -4,9 +4,8 @@ import { BaseApp, StandardLogger } from '@nodescript/microframework';
 import { Config, ProcessEnvConfig } from 'mesh-config';
 import { dep, Mesh } from 'mesh-ioc';
 
-import { FetchHttpHandler } from './global/FetchHttpHandler.js';
-import { FetchHttpServer } from './global/FetchHttpServer.js';
-import { ForwardRequestHandler } from './global/ForwardRequestHandler.js';
+import { FetchHandler } from './global/FetchHandler.js';
+import { MainHttpServer } from './global/MainHttpServer.js';
 import { Metrics } from './global/Metrics.js';
 
 export class App extends BaseApp {
@@ -17,13 +16,12 @@ export class App extends BaseApp {
         super(new Mesh('App'));
         this.mesh.service(Config, ProcessEnvConfig);
         this.mesh.service(Logger, StandardLogger);
-        this.mesh.service(HttpServer, FetchHttpServer);
         this.mesh.service(Metrics);
-        this.mesh.service(FetchHttpHandler);
-        this.mesh.service(HttpMetricsHandler);
+        this.mesh.service(HttpServer, MainHttpServer);
         this.mesh.service(StandardHttpHandler);
+        this.mesh.service(HttpMetricsHandler);
         this.mesh.service(HttpCorsHandler);
-        this.mesh.service(ForwardRequestHandler);
+        this.mesh.service(FetchHandler);
     }
 
     override async start() {

@@ -8,7 +8,7 @@ import { FetchRequestSpec, FetchRequestSpecSchema } from '../../schema/FetchRequ
 import { parseJson } from '../util.js';
 import { Metrics } from './Metrics.js';
 
-export class ForwardRequestHandler extends HttpRouter {
+export class FetchHandler extends HttpRouter {
 
     @dep() private logger!: Logger;
     @dep() private metrics!: Metrics;
