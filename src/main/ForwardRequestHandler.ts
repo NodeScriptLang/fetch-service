@@ -1,6 +1,5 @@
 import { HttpContext, HttpRoute, HttpRouter } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
-import { config } from 'mesh-config';
 import { dep } from 'mesh-ioc';
 import { Agent, Dispatcher, getGlobalDispatcher, ProxyAgent, request } from 'undici';
 
@@ -9,16 +8,13 @@ import { FetchRequestSpec, FetchRequestSpecSchema } from '../schema/FetchRequest
 import { Metrics } from './Metrics.js';
 import { parseJson } from './util.js';
 
-export class HttpFetchHandler extends HttpRouter {
-
-    @config({ default: '' })
-    FETCH_PREFIX!: string;
+export class ForwardRequestHandler extends HttpRouter {
 
     @dep() private logger!: Logger;
     @dep() private metrics!: Metrics;
 
     routes: HttpRoute[] = [
-        ['POST', `${this.FETCH_PREFIX}/request`, ctx => this.handleRequest(ctx)],
+        ['POST', `/request`, ctx => this.handleRequest(ctx)],
     ];
 
     async handleRequest(ctx: HttpContext) {
