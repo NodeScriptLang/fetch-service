@@ -27,6 +27,6 @@ jobs:
       image_name: nodescript-fetch-service
       env_name: production
       app_path: apps/fetch-service
-      auto_merge: false
+      auto_merge: true
     secrets:
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
