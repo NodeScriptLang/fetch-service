@@ -33,7 +33,7 @@
         "@nodescript/http-server": "^2.3.2",
         "@nodescript/logger": "^2.0.4",
         "@nodescript/metrics": "^1.2.1",
-        "@nodescript/microframework": "^1.8.3",
+        "@nodescript/microframework": "^1.8.4",
         "@nodescript/protocomm": "^1.0.0",
         "airtight": "^5.7.0",
         "dotenv": "^16.4.5",
