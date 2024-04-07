@@ -1,17 +1,37 @@
 import { HttpContext, HttpRoute, HttpRouter } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
+import { CounterMetric, HistogramMetric, metric } from '@nodescript/metrics';
 import { dep } from 'mesh-ioc';
 import { Agent, Dispatcher, getGlobalDispatcher, ProxyAgent, request } from 'undici';
 
 import { FetchMethod } from '../../schema/FetchMethod.js';
 import { FetchRequestSpec, FetchRequestSpecSchema } from '../../schema/FetchRequestSpec.js';
 import { parseJson } from '../util.js';
-import { Metrics } from './Metrics.js';
 
 export class FetchHandler extends HttpRouter {
 
     @dep() private logger!: Logger;
-    @dep() private metrics!: Metrics;
+
+    @metric()
+    private requestLatency = new HistogramMetric<{
+        status: number;
+        method: string;
+        hostname: string;
+        error?: string;
+    }>('nodescript_fetch_service_request_latency', 'NodeScript Fetch Service request latency');
+
+    @metric()
+    private responseSize = new CounterMetric<{
+        status: number;
+        method: string;
+        hostname: string;
+    }>('nodescript_fetch_service_response_size', 'NodeScript Fetch Service response size');
+
+    @metric()
+    private errors = new CounterMetric<{
+        error: string;
+        code: string;
+    }>('nodescript_fetch_service_errors_total', 'NodeScript Fetch Service errors');
 
     routes: HttpRoute[] = [
         ['POST', `/request`, ctx => this.handleRequest(ctx)],
@@ -52,19 +72,19 @@ export class FetchHandler extends HttpRouter {
                 status: res.statusCode,
                 size,
             });
-            this.metrics.requestLatency.addMillis(Date.now() - ctx.startedAt, {
+            this.requestLatency.addMillis(Date.now() - ctx.startedAt, {
                 status: res.statusCode,
                 method,
                 hostname: this.tryParseHostname(url),
             });
-            this.metrics.responseSize.incr(size, {
+            this.responseSize.incr(size, {
                 status: res.statusCode,
                 method,
                 hostname: this.tryParseHostname(url),
             });
         } catch (error: any) {
             error.stack = '';
-            this.metrics.errors.incr(1, {
+            this.errors.incr(1, {
                 error: error.name,
                 code: error.code,
             });

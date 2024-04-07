@@ -1,12 +1,9 @@
-import { HttpCorsHandler, HttpErrorHandler, HttpMetricsHandler, HttpServer, HttpStatusHandler } from '@nodescript/http-server';
-import { Logger } from '@nodescript/logger';
-import { BaseApp, StandardLogger } from '@nodescript/microframework';
-import { Config, ProcessEnvConfig } from 'mesh-config';
+import { HttpServer } from '@nodescript/http-server';
+import { BaseApp } from '@nodescript/microframework';
 import { dep, Mesh } from 'mesh-ioc';
 
 import { FetchHandler } from './global/FetchHandler.js';
 import { MainHttpServer } from './global/MainHttpServer.js';
-import { Metrics } from './global/Metrics.js';
 
 export class App extends BaseApp {
 
@@ -14,14 +11,7 @@ export class App extends BaseApp {
 
     constructor() {
         super(new Mesh('App'));
-        this.mesh.service(Config, ProcessEnvConfig);
-        this.mesh.service(Logger, StandardLogger);
-        this.mesh.service(Metrics);
         this.mesh.service(HttpServer, MainHttpServer);
-        this.mesh.service(HttpErrorHandler);
-        this.mesh.service(HttpStatusHandler);
-        this.mesh.service(HttpMetricsHandler);
-        this.mesh.service(HttpCorsHandler);
         this.mesh.service(FetchHandler);
     }
 
