@@ -7,20 +7,16 @@ on:
 
 jobs:
   build:
-    uses: ubio/github-actions/.github/workflows/ci-build.yaml@master
+    uses: NodeScriptLang/github-actions/.github/workflows/ci-build.yaml@main
     with:
-      name: NodeScript Fetch Service
-      image: gcr.io/automation-cloud-registry/nodescript-fetch-service
-      ref: ${{ github.ref }}
+      image: europe-west1-docker.pkg.dev/nodescript-production/nodescript-image-registry/nodescript-fetch-service
       file: Dockerfile
     secrets:
       REGISTRY_SECRET: ${{ secrets.GCP_REGISTRY_ACCESS }}
-      SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-      SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
 
   deploy-production:
     needs: build
-    uses: ubio/github-actions/.github/workflows/cd-dispatch-deploy.yaml@master
+    uses: NodeScriptLang/github-actions/.github/workflows/ci-deploy.yaml@main
     with:
       gh_user: NodeScriptLang
       gh_repo: infrastructure
