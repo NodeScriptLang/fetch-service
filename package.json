@@ -35,6 +35,7 @@
         "@nodescript/metrics": "^1.3.1",
         "@nodescript/microframework": "^1.11.6",
         "@nodescript/protocomm": "^1.0.2",
+        "@nodescript/unified-fetch": "^1.0.3",
         "airtight": "^5.7.2",
         "dotenv": "^16.4.5",
         "mesh-config": "^1.1.2",
