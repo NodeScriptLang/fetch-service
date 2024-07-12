@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES2020",
+        "target": "ES2022",
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "strict": true,
@@ -14,6 +14,7 @@
         "noImplicitOverride": true,
         "allowJs": true,
         "checkJs": false,
+        "useDefineForClassFields": false,
         "lib": [
             "ES2020"
         ]
