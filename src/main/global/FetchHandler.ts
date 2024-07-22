@@ -1,12 +1,12 @@
+import { FetchRequestSpecSchema } from '@nodescript/core/schema';
+import { FetchMethod, FetchRequestSpec } from '@nodescript/core/types';
 import { HttpContext, HttpRoute, HttpRouter } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
 import { CounterMetric, HistogramMetric, metric } from '@nodescript/metrics';
-import { unifiedFetch } from '@nodescript/unified-fetch/backend';
-import { FetchRequestSpecSchema } from '@nodescript/unified-fetch/schema';
-import { FetchMethod, FetchRequestSpec } from '@nodescript/unified-fetch/types';
 import { dep } from 'mesh-ioc';
 
 import { parseJson } from '../util.js';
+import { fetchUndici } from '@nodescript/fetch-undici';
 
 export class FetchHandler extends HttpRouter {
 
@@ -40,7 +40,7 @@ export class FetchHandler extends HttpRouter {
     async handleRequest(ctx: HttpContext) {
         try {
             const req = this.parseRequestSpec(ctx);
-            const res = await unifiedFetch(req, ctx.request);
+            const res = await fetchUndici(req, ctx.request);
             ctx.status = 200;
             ctx.addResponseHeaders({
                 'x-fetch-status': [String(res.status)],
