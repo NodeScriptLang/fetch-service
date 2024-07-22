@@ -1,12 +1,12 @@
 import { FetchRequestSpecSchema } from '@nodescript/core/schema';
 import { FetchMethod, FetchRequestSpec } from '@nodescript/core/types';
+import { fetchUndici } from '@nodescript/fetch-undici';
 import { HttpContext, HttpRoute, HttpRouter } from '@nodescript/http-server';
 import { Logger } from '@nodescript/logger';
 import { CounterMetric, HistogramMetric, metric } from '@nodescript/metrics';
 import { dep } from 'mesh-ioc';
 
 import { parseJson } from '../util.js';
-import { fetchUndici } from '@nodescript/fetch-undici';
 
 export class FetchHandler extends HttpRouter {
 
