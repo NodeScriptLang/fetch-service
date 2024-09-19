@@ -1,6 +1,6 @@
 {
     "name": "@nodescript/fetch-service",
-    "version": "2.10.6",
+    "version": "2.10.7",
     "description": "Fetch Service for sending HTTP requests",
     "type": "module",
     "sideEffects": false,
