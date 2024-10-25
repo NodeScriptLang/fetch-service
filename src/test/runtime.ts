@@ -4,6 +4,7 @@ import { App } from '../main/app.js';
 import { TestHttpServer } from './test-server.js';
 
 export class TestRuntime {
+
     app = new App();
 
     @dep({ cache: false }) testHttpServer!: TestHttpServer;

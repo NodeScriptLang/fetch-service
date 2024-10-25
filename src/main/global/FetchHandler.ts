@@ -88,7 +88,7 @@ export class FetchHandler extends HttpRouter {
         try {
             const { hostname } = new URL(url);
             return hostname;
-        } catch (error) {
+        } catch (_err) {
             return '<invalid url>';
         }
     }

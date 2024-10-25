@@ -11,7 +11,7 @@
         "dev:ts": "tsc -b -w",
         "dev:http": "NODE_ENV=development node ./out/bin/http.js",
         "compile": "npm run clean && tsc -b",
-        "lint": "eslint --ext=.js,.ts,.vue --cache .",
+        "lint": "eslint --cache .",
         "test": "NODE_NO_WARNINGS=1 NODE_ENV=test mocha",
         "build": "run-s compile",
         "version": "run-s version:*",
@@ -44,10 +44,10 @@
         "undici": "^5.28.3"
     },
     "devDependencies": {
-        "@nodescript/eslint-config": "^1.2.0",
+        "@nodescript/eslint-config": "^2.0.1",
         "@types/mocha": "^10.0.6",
         "@types/node": "^20.11.25",
-        "eslint": "^8.57.0",
+        "eslint": "^9.13.0",
         "mocha": "^10.3.0",
         "npm-run-all": "^4.1.5",
         "pre-commit": "^1.2.2",
