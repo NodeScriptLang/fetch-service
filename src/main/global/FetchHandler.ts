@@ -80,6 +80,7 @@ export class FetchHandler extends HttpRouter {
             headers: parseJson(ctx.getRequestHeader('x-fetch-headers'), {}),
             followRedirects: ctx.getRequestHeader('x-fetch-follow-redirects') !== 'false',
             proxy: ctx.getRequestHeader('x-fetch-proxy', '') || undefined,
+            timeout: Number(ctx.getRequestHeader('x-fetch-timeout', '')) || undefined,
             connectOptions: parseJson(ctx.getRequestHeader('x-fetch-connect-options', ''), {}),
         });
     }
