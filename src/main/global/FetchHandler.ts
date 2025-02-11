@@ -40,6 +40,11 @@ export class FetchHandler extends HttpRouter {
     async handleRequest(ctx: HttpContext) {
         try {
             const req = this.parseRequestSpec(ctx);
+            // Handle special case where content-type is set in the header by the browser
+            const contentType = ctx.getRequestHeader('content-type');
+            if (contentType && !req.headers['content-type']) {
+                req.headers['content-type'] = contentType;
+            }
             const res = await fetchUndici(req, ctx.request);
             ctx.status = 200;
             ctx.addResponseHeaders({
