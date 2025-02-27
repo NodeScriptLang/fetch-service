@@ -45,9 +45,8 @@ export class FetchHandler extends HttpRouter {
             if (contentType && !req.headers['content-type']) {
                 req.headers['content-type'] = contentType;
             }
-            const startTime = Date.now();
             const res = await fetchUndici(req, ctx.request);
-            const latency = Date.now() - startTime;
+            const latency = Date.now() - ctx.startedAt;
             ctx.status = 200;
             ctx.addResponseHeaders({
                 'x-fetch-status': [String(res.status)],
