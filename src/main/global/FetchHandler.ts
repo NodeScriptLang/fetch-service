@@ -51,7 +51,7 @@ export class FetchHandler extends HttpRouter {
             ctx.addResponseHeaders({
                 'x-fetch-status': [String(res.status)],
                 'x-fetch-headers': [JSON.stringify(res.headers)],
-                'x-latency-ms': [String(latency)],
+                'x-fetch-latency-ms': [String(latency)],
             });
             ctx.responseBody = res.body;
             const size = Number(res.headers['content-length']) || 0;
