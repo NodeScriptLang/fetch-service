@@ -46,10 +46,12 @@ export class FetchHandler extends HttpRouter {
                 req.headers['content-type'] = contentType;
             }
             const res = await fetchUndici(req, ctx.request);
+            const latency = Date.now() - ctx.startedAt;
             ctx.status = 200;
             ctx.addResponseHeaders({
                 'x-fetch-status': [String(res.status)],
                 'x-fetch-headers': [JSON.stringify(res.headers)],
+                'x-latency-ms': [String(latency)],
             });
             ctx.responseBody = res.body;
             const size = Number(res.headers['content-length']) || 0;
@@ -58,7 +60,7 @@ export class FetchHandler extends HttpRouter {
                 status: res.status,
                 size,
             });
-            this.requestLatency.addMillis(Date.now() - ctx.startedAt, {
+            this.requestLatency.addMillis(latency, {
                 status: res.status,
                 method: req.method,
                 hostname: this.tryParseHostname(req.url),
