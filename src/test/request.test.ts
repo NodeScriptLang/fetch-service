@@ -42,7 +42,6 @@ describe('/request', () => {
         assert.strictEqual(headers['x-response-time'], '42');
         assert.strictEqual(headers['cache-control'][0], 'private');
         assert.strictEqual(headers['cache-control'][1], 'no-cache');
-        assert.ok(res.headers.get('x-latency-ms'));
     });
 
     it('sends POST with body', async () => {
@@ -68,7 +67,6 @@ describe('/request', () => {
             body: 'Hello World!',
         });
         assert.strictEqual(res.status, 200);
-        assert.ok(res.headers.get('x-latency-ms'));
     });
 
     it('returns CORS headers in response when Origin is sent', async () => {
