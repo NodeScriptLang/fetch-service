@@ -29,9 +29,9 @@
     "author": "Boris Okunskiy",
     "license": "ISC",
     "dependencies": {
-        "@nodescript/core": "^7.25.1",
+        "@nodescript/core": "^7.25.2",
         "@nodescript/errors": "^1.1.4",
-        "@nodescript/fetch-undici": "^1.4.5",
+        "@nodescript/fetch-undici": "^1.4.6",
         "@nodescript/http-server": "^2.10.1",
         "@nodescript/logger": "^2.0.4",
         "@nodescript/metrics": "^1.7.1",
